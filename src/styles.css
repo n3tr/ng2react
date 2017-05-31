@@ -446,10 +446,41 @@ template {
   display: none;
 }
 
+/**
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    contenteditable attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that are clearfixed.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
 
 /*
  * APP START HERE
 */
+
+html {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #484848;
+}
 
 .container {
     max-width: 480px;
@@ -470,7 +501,43 @@ template {
     border: none;
     border-bottom: 1px solid #ddd;
 
+    color: #484848;
+    font-weight: 300;
+
     outline: none;
+}
+
+.topic-list {
+  list-style: none;
+  padding: 0;
+  margin: 40px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.topic-list__item {
+  
+  
+}
+
+.topic-list__item a {
+  display: block;
+  padding: 6px 12px;
+  margin: 8px;
+  border-radius: 4px;
+
+  color: #484848;
+  background: #eee;
+
+  font-size: 1.2rem;
+  text-decoration: none;
+  
+  transition: all 0.2s ease;
+  
+}
+
+.topic-list__item a:hover {
+  background: #ccc;
 }
 
 .repo-list {
@@ -486,11 +553,44 @@ template {
 }
 
 .repo-info {
-    padding: 20px;
+  display: flex;
+  flex-direction: row;
 
-    transition: all 0.2s ease;
+  padding: 20px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+    
 }
 
 .repo-info:hover {
-    background: #f8f8f8;
+    background: #eee;
+}
+ 
+.repo-info:hover .repo-info__title,
+.repo-info:hover .repo-info__stars {
+  /*color: #fff;*/
+}
+
+
+
+.repo-info__title {
+  flex: 1;
+  color: #484848;
+  font-size: 1.5rem;
+
+  line-height: 32px;
+  margin-left: 24px;
+}
+
+.repo-info__stars {
+  font-size: 1.5rem;
+  color: #aaa;
+  line-height: 32px;
+}
+
+.repo-info__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  
 }
