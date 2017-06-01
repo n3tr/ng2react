@@ -60,7 +60,8 @@ module.exports = {
   "resolve": {
     "extensions": [
       ".ts",
-      ".js"
+      ".js",
+      ".tsx"
     ],
     "modules": [
       "./node_modules",
@@ -93,7 +94,7 @@ module.exports = {
       {
         "enforce": "pre",
         "test": /\.js$/,
-        "loader": "source-map-loader",
+        "loaders": ["@ngtools/webpack", "source-map-loader"],
         "exclude": [
           /\/node_modules\//
         ]
@@ -341,7 +342,7 @@ module.exports = {
         ]
       },
       {
-        "test": /\.ts$/,
+        "test": /\.tsx?$/,
         "loader": "@ngtools/webpack"
       }
     ]
