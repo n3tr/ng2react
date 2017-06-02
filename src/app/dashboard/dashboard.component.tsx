@@ -7,6 +7,7 @@ import { Repo } from '../models/Repo';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import RepoList from '../components/RepoList';
 
 @Component({
   selector: 'dashboard',
@@ -14,7 +15,7 @@ import ReactDOM from 'react-dom';
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('reactHost') reactHost;
+  @ViewChild('repoListHost') repoListHost;
 
   topics = new BehaviorSubject<String[]>(['React', 'Angular', 'Vue']);
   repos = new BehaviorSubject<Repo[]>([]);
@@ -26,7 +27,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    ReactDOM.render(<h1>Hello, React</h1>, this.reactHost.nativeElement);
+    this.repos.subscribe( repos => {
+      ReactDOM.render(<RepoList repos={repos} />, this.repoListHost.nativeElement);
+    });
   }
 
   addTopic(topic: string) {

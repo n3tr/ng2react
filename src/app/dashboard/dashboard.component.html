@@ -1,9 +1,10 @@
 <div class="container">
   
-  <div #reactHost></div>
+  
 
   <topic-form (onSubmitTopic)="addTopic($event)"></topic-form>
   <topic-list [topics]="topics" (onSelectTopic)="selectTopic($event)"></topic-list>
   <span *ngIf="loading | async">Loading</span>
+  <div #repoListHost></div>
   <result-list [repos]="repos" ></result-list>
 </div>
