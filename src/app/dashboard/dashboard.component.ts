@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router } from '@angular/router';
 
-
+import { Repo } from '../models/Repo';
 
 @Component({
   selector: 'dashboard',
@@ -11,9 +11,11 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  topics = new BehaviorSubject<String[]>(['React']);
+  topics = new BehaviorSubject<String[]>(['React', 'Angular', 'Vue']);
+  repos = new BehaviorSubject<Repo[]>([]);
+  loading = new BehaviorSubject<boolean>(false);
 
-  constructor( private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
   }
@@ -25,6 +27,23 @@ export class DashboardComponent implements OnInit {
 
   selectTopic(topic: string) {
     event.preventDefault();
-    this.router.navigate(['/topic', topic]);
+    this.fetchRepoForTopic(topic);
+  }
+
+  fetchRepoForTopic(topic) {
+    this.repos.next([]);
+    this.loading.next(true);
+
+    fetch(
+      `https://api.github.com/search/repositories?order=desc&q=topic:${topic}&sort=stars`
+    )
+    .then( response => response.json() )
+    .then( json => json['items'] )
+    .then( items => items.map( (repo) => new Repo(repo) ))
+    .then( repos => {
+      this.loading.next(false);
+      this.repos.next(repos);
+    })
+    .catch( err => console.error(err));
   }
 }

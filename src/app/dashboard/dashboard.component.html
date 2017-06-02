@@ -2,4 +2,6 @@
   
   <topic-form (onSubmitTopic)="addTopic($event)"></topic-form>
   <topic-list [topics]="topics" (onSelectTopic)="selectTopic($event)"></topic-list>
+  <span *ngIf="loading | async">Loading</span>
+  <result-list [repos]="repos" ></result-list>
 </div>
