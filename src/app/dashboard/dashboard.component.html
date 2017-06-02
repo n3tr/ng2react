@@ -1,10 +1,6 @@
 <div class="container">
-  
-  
-
-  <topic-form (onSubmitTopic)="addTopic($event)"></topic-form>
-  <topic-list [topics]="topics" (onSelectTopic)="selectTopic($event)"></topic-list>
+  <div #topicFormHost></div>
+  <div #topicListHost></div>
   <span *ngIf="loading | async">Loading</span>
   <div #repoListHost></div>
-  <result-list [repos]="repos" ></result-list>
 </div>

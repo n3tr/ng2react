@@ -7,7 +7,10 @@ import { Repo } from '../models/Repo';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import RepoList from '../components/RepoList';
+import TopicList from '../components/TopicList';
+import TopicForm from '../components/TopicForm';
 
 @Component({
   selector: 'dashboard',
@@ -16,6 +19,8 @@ import RepoList from '../components/RepoList';
 export class DashboardComponent implements OnInit, AfterViewInit {
 
   @ViewChild('repoListHost') repoListHost;
+  @ViewChild('topicListHost') topicListHost;
+  @ViewChild('topicFormHost') topicFormHost;
 
   topics = new BehaviorSubject<String[]>(['React', 'Angular', 'Vue']);
   repos = new BehaviorSubject<Repo[]>([]);
@@ -30,6 +35,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.repos.subscribe( repos => {
       ReactDOM.render(<RepoList repos={repos} />, this.repoListHost.nativeElement);
     });
+
+    this.topics.subscribe( topics => {
+      ReactDOM.render(<TopicList topics={topics} onSelectTopic={this.selectTopic.bind(this)} />, this.topicListHost.nativeElement);
+    });
+
+    ReactDOM.render(<TopicForm  onSubmitTopic={this.addTopic.bind(this)} />, this.topicFormHost.nativeElement);
   }
 
   addTopic(topic: string) {
