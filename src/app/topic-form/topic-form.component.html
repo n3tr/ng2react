@@ -1,0 +1,7 @@
+<div class="search">
+  <form class="search-form" (submit)="onSubmit($event)">
+    <input
+    autocomplete="off" 
+    type="text" class="search-form__input" placeholder="Type something" name="topic" [(ngModel)]="currentText"/>
+  </form>
+</div>

@@ -487,6 +487,23 @@ html {
     margin: 0 auto;
 }
 
+.header {
+  padding-top: 40px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.headline a{
+  text-decoration: none;
+  font-size: 3rem;
+  font-weight: 300;
+  color: #b1b1b1;
+}
+
+.tb {
+  font-weight: bold;
+}
+
 .search {
     width: 100%;
     margin-top: 80px;
