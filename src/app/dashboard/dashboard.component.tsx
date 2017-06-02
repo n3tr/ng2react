@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router } from '@angular/router';
 
 import { Repo } from '../models/Repo';
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('reactHost') reactHost;
 
   topics = new BehaviorSubject<String[]>(['React', 'Angular', 'Vue']);
   repos = new BehaviorSubject<Repo[]>([]);
@@ -18,6 +23,10 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    ReactDOM.render(<h1>Hello, React</h1>, this.reactHost.nativeElement);
   }
 
   addTopic(topic: string) {
