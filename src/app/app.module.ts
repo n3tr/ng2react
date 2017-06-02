@@ -10,7 +10,7 @@ import { ResultPageComponent } from './result-page/result-page.component';
 import { TopicFormComponent } from './topic-form/topic-form.component';
 import { TopicListComponent } from './topic-list/topic-list.component';
 
-
+import { TopicService } from './topic.service';
 
 //
 // APPLICATION ROUTES
@@ -36,7 +36,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [TopicService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,24 +3,22 @@ import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router } from '@angular/router';
 
-
+import { TopicService } from '../topic.service';
 
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
-  topics = new BehaviorSubject<String[]>(['React']);
+  topics: BehaviorSubject<string[]>;
 
-  constructor( private router: Router) { }
-
-  ngOnInit() {
+  constructor( private router: Router, private topicService: TopicService) {
+    this.topics = this.topicService.topics;
   }
 
   addTopic(topic: string) {
-    const currentTopics = this.topics.getValue();
-    this.topics.next(currentTopics.concat([topic]));
+    this.topicService.addTopic(topic);
   }
 
   selectTopic(topic: string) {

@@ -18,7 +18,6 @@ export class TopicFormComponent implements OnInit {
     event.preventDefault();
     this.onSubmitTopic.emit(this.currentText);
     this.currentText = '';
-
   }
 
 }
