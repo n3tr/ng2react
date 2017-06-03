@@ -34,8 +34,16 @@ export class DashboardComponent implements OnInit {
     this.repos.next([]);
     this.loading.next(true);
 
+    const header = new Headers({
+        Authorization: 'token a65ddc5d87e40325e0753b82b711d9b1a360519a'
+    });
+    const options = {
+        headers: header
+    };
+
+
     fetch(
-      `https://api.github.com/search/repositories?order=desc&q=topic:${topic}&sort=stars`
+      `https://api.github.com/search/repositories?order=desc&q=topic:${topic}&sort=stars`, options
     )
     .then( response => response.json() )
     .then( json => json['items'] )

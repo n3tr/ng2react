@@ -4,6 +4,7 @@ export class Repo {
   full_name: string;
   stargazers_count: number;
   avatar_url: string;
+  html_url: string;
 
   constructor(json: any) {
     this.id = json.id;
@@ -11,5 +12,6 @@ export class Repo {
     this.full_name = json.full_name;
     this.stargazers_count = json.stargazers_count;
     this.avatar_url = json.owner.avatar_url;
+    this.html_url = json.html_url;
   }
 }

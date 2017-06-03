@@ -6,20 +6,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ResultPageComponent } from './result-page/result-page.component';
 import { TopicFormComponent } from './topic-form/topic-form.component';
 import { TopicListComponent } from './topic-list/topic-list.component';
 import { ResultListComponent } from './result-list/result-list.component';
 
-
-
-//
-// APPLICATION ROUTES
-//
-const appRoutes: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'topic/:topic',      component: ResultPageComponent }
-];
 
 
 
@@ -27,7 +17,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     DashboardComponent,
-    ResultPageComponent,
     TopicFormComponent,
     TopicListComponent,
     ResultListComponent
@@ -35,8 +24,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    RouterModule.forRoot(appRoutes)
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
