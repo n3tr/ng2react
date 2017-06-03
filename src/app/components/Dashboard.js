@@ -27,8 +27,17 @@ export default class Dashboard extends React.Component {
             loading: true
         })
 
+
+        const header = new Headers({
+            Authorization: 'token a65ddc5d87e40325e0753b82b711d9b1a360519a'
+        });
+        const options = {
+            headers: header
+        };
+
+
         fetch(
-            `https://api.github.com/search/repositories?order=desc&q=topic:${topic}&sort=stars`
+            `https://api.github.com/search/repositories?order=desc&q=topic:${topic}&sort=stars`,options
         )
             .then(response => response.json())
             .then(json => json['items'])
@@ -44,11 +53,11 @@ export default class Dashboard extends React.Component {
 
     render() {
         return (
-            <div className="container">  
+            <div className="container">
                 <TopicForm onSubmitTopic={this.addTopic.bind(this)} />
                 <TopicList topics={this.state.topics} onSelectTopic={this.selectTopic.bind(this)} />
                 <RepoList repos={this.state.repos} />
-                { this.state.loading ? <span>Loading</span> : null }
+                {this.state.loading ? <span>Loading</span> : null}
             </div>
         )
     }
