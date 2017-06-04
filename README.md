@@ -1,28 +1,76 @@
-# Ng2react
+# NG2REACT
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.6.
+## TypeScript and Webpack configurtion for React
 
-## Development server
+> Make a Commit, before doing anything here!
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Make an Eject
 
-## Code scaffolding
+```sh
+ng eject
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+- Modify `tsconfig.json` to support `jsx` and `js`
+- Modify `webpack.config.js` loaders.
 
-## Build
+`tsconfig.json`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+```diff
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "baseUrl": "src",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
++   "jsx": "react",
++   "allowJs": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2016",
+      "dom"
+    ]
+  }
+}
+```
 
-## Running unit tests
+`webpack.config.js`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```diff
 
-## Running end-to-end tests
+    {
+        "enforce": "pre",
+        "test": /\.js$/,
+-       "loader": "source-map-loader",
++       "loaders": ["@ngtools/webpack", "source-map-loader"],
+        "exclude": [
+          /\/node_modules\//
+        ]
+    }
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+    ...
 
-## Further help
+    {
+-       "test": /\.ts$/,
++       "test": /\.tsx?$/,
+        "loader": "@ngtools/webpack"
+    }
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+    ...
+
+    "resolve": {
+        "extensions": [
+            ".ts",
+-           ".js"
++           ".js",
++           ".tsx" 
+        ],
+
+        
+```
