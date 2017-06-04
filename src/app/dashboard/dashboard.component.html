@@ -1,7 +1,8 @@
 <div class="container">
   
-  <topic-form (onSubmitTopic)="addTopic($event)"></topic-form>
-  <topic-list [topics]="topics" (onSelectTopic)="selectTopic($event)"></topic-list>
+  <div #reactTopicForm> </div>
+  <div #reactTopicList> </div>
+  <div #reactRepoList> </div>
+
   <span *ngIf="loading | async">Loading</span>
-  <result-list [repos]="repos" ></result-list>
 </div>

@@ -6,9 +6,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { TopicFormComponent } from './topic-form/topic-form.component';
-import { TopicListComponent } from './topic-list/topic-list.component';
-import { ResultListComponent } from './result-list/result-list.component';
 
 
 
@@ -16,10 +13,7 @@ import { ResultListComponent } from './result-list/result-list.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    TopicFormComponent,
-    TopicListComponent,
-    ResultListComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

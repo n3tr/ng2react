@@ -1,15 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router } from '@angular/router';
 
 import { Repo } from '../models/Repo';
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TopicList from '../components/TopicList';
+import RepoList from '../components/RepoList';
+import TopicForm from '../components/TopicForm';
+
 @Component({
   selector: 'dashboard',
   templateUrl: './dashboard.component.html'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('reactTopicList') reactTopicList;
+  @ViewChild('reactTopicForm') reactTopicForm;
+  @ViewChild('reactRepoList') reactRepoList;
 
   topics = new BehaviorSubject<String[]>(['React', 'Angular', 'Vue']);
   repos = new BehaviorSubject<Repo[]>([]);
@@ -18,6 +28,22 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    
+  }
+
+  ngAfterViewInit() {
+
+    this.topics.subscribe( topics => {
+      ReactDOM.render(
+      <TopicList topics={topics} onSelectTopic={this.selectTopic.bind(this)} />,
+      this.reactTopicList.nativeElement);
+    });
+
+    this.repos.subscribe( (repos) => {
+      ReactDOM.render(<RepoList repos={repos} />, this.reactRepoList.nativeElement);
+    });
+
+    ReactDOM.render(<TopicForm onSubmitTopic={this.addTopic.bind(this)} />, this.reactTopicForm.nativeElement);
   }
 
   addTopic(topic: string) {
